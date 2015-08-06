@@ -40,9 +40,15 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,8 +56,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\CompoundNameResult.cs" />
+    <Compile Include="Analysis\FamilyNameResult.cs" />
+    <Compile Include="Analysis\FragmentResult.cs" />
+    <Compile Include="Analysis\GivenNameResult.cs" />
+    <Compile Include="Analysis\NameAnalyser.cs" />
+    <Compile Include="Analysis\NameAnalysisOptions.cs" />
+    <Compile Include="Analysis\NameAnalysisResult.cs" />
     <Compile Include="CompoundName.cs" />
     <Compile Include="FrequencyType.cs" />
+    <Compile Include="Import\INameImportSource.cs" />
+    <Compile Include="Import\NameImporter.cs" />
+    <Compile Include="Import\NameProperty.cs" />
     <Compile Include="NameContext.cs" />
     <Compile Include="Name.cs" />
     <Compile Include="NameBundle.cs" />
@@ -72,7 +88,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

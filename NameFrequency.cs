@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Etilic.Name
     /// </summary>
     public class NameFrequency
     {
+        #region Properties
         /// <summary>
         /// Gets or sets the globally unique ID of this frequency information.
         /// </summary>
@@ -22,6 +24,7 @@ namespace Etilic.Name
         /// <summary>
         /// Gets or sets the globally unique ID of the name usage which this frequency information is for.
         /// </summary>
+        [Index]
         public Guid NameUsedID
         {
             get;
@@ -59,6 +62,7 @@ namespace Etilic.Name
             get;
             set;
         }
+        #endregion
 
         #region Navigational Properties
         /// <summary>
@@ -71,12 +75,14 @@ namespace Etilic.Name
         }
         #endregion
 
+        #region Constructors
         public NameFrequency()
         {
             this.ID = Guid.NewGuid();
         }
 
         public NameFrequency(DateTime start, DateTime end)
+            : this()
         {
             if (start > end)
                 throw new ArgumentOutOfRangeException("start must be earlier than end.");
@@ -84,5 +90,6 @@ namespace Etilic.Name
             this.PeriodStart = start;
             this.PeriodEnd = end;
         }
+        #endregion
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace Etilic.Name
         /// Gets or sets the System.String that this Name represents.
         /// </summary>
         [Required]
+        [Index]
+        [StringLength(200)]
         public String Value
         {
             get;
@@ -37,7 +40,7 @@ namespace Etilic.Name
         /// <summary>
         /// Gets or sets the ways in which this name is used.
         /// </summary>
-        public List<NameUsage> Usage
+        public virtual List<NameUsage> Usage
         {
             get;
             set;
@@ -61,16 +64,18 @@ namespace Etilic.Name
         }
         #endregion
 
-        public NameUsage UsageFor(CultureInfo culture)
+        public NameUsage UsageFor(CultureInfo culture, Boolean family = false)
         {
-            return this.Usage.SingleOrDefault(x => 
-                x.CultureName.Equals(culture.Name));
+            NameUsage result = this.Usage.SingleOrDefault(x => 
+                x.CultureName.Equals(culture.Name, StringComparison.OrdinalIgnoreCase) && family == x.FamilyName);
+
+            return result;
         }
 
         public NameUsage UsageFor(CultureInfo culture, Sex sex)
         {
             return this.Usage.SingleOrDefault(x => 
-                x.CultureName.Equals(culture.Name) && x.Sex == sex);
+                x.CultureName.Equals(culture.Name, StringComparison.OrdinalIgnoreCase) && x.Sex == sex);
         }
     }
 }

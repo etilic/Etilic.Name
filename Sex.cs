@@ -18,6 +18,10 @@ namespace Etilic.Name
         /// <summary>
         /// Female.
         /// </summary>
-        Female = 1
+        Female = 1,
+        /// <summary>
+        /// Unknown / can't have a sex.
+        /// </summary>
+        NotApplicable = 2,
     }
 }
